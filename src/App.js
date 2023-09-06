@@ -5,12 +5,9 @@ import ContextAuth from "./contextStore/AuthContext";
 import ContextPost from "./contextStore/PostContext";
 import MainRoutes from "./Routes/MainRoutes";
 
-
 function App() {
   return (
     <div>
-     
-
       <ContextAuth>
         <ContextAllPost>
           <ContextPost>

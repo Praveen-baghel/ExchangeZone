@@ -13,10 +13,10 @@ function Posts() {
   let [posts, setPosts] = useState([]); //for showing all posts in Descending order of date
   let [posts2, setPosts2] = useState([]); //for showing all posts in Ascending order of date
   let [loading, setLoading] = useState(false);
-  let [loading2,setLoading2] = useState(false)
+  let [loading2, setLoading2] = useState(false);
   useEffect(() => {
     setLoading(true);
-    setLoading2(true)
+    setLoading2(true);
     Firebase.firestore() //retreving all posts from firebase in descending order
       .collection("products")
       .orderBy("createdAt", "desc")
@@ -44,19 +44,30 @@ function Posts() {
           };
         });
         setPosts(allPostsAscendingOder);
-        setLoading2(false)
-        
+        setLoading2(false);
       });
   }, [setAllPost]);
   // quickMenuCards assign all cards of post item later it will be displayed
   let quickMenuCards = posts.map((product, index) => {
-    return(<div className="quick-menu-cards" key={index}> <PostCards product={product} index={index} /> </div>);
+    return (
+      <div className="quick-menu-cards" key={index}>
+        {" "}
+        <PostCards product={product} index={index} />{" "}
+      </div>
+    );
   });
 
-  let freshRecomendationCards = posts2.map((product, index) => { if(index<4) {
-    return (<div className="fresh-recomendation-card" key={index}> <PostCards product={product} index={index} /> </div>);}
-    return null 
-});
+  let freshRecomendationCards = posts2.map((product, index) => {
+    if (index < 4) {
+      return (
+        <div className="fresh-recomendation-card" key={index}>
+          {" "}
+          <PostCards product={product} index={index} />{" "}
+        </div>
+      );
+    }
+    return null;
+  });
   return (
     <div className="postParentDiv">
       {posts && (
@@ -74,12 +85,14 @@ function Posts() {
           </div>
         </div>
       )}
-     <div className="recommendations">
+      <div className="recommendations">
         <div className="heading">
           <span>Fresh recommendations</span>
         </div>
-        <div className="fresh-recomendation-cards cards">{loading2 ? <BarLoading/> : freshRecomendationCards}</div> 
-      </div> 
+        <div className="fresh-recomendation-cards cards">
+          {loading2 ? <BarLoading /> : freshRecomendationCards}
+        </div>
+      </div>
     </div>
   );
 }
