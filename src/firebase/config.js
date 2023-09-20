@@ -1,16 +1,15 @@
-import firebase from 'firebase/compat/app'
-import 'firebase/compat/auth'
-import 'firebase/compat/firestore'
-import 'firebase/compat/storage'
-
+import firebase from "firebase/compat/app";
+import "firebase/compat/auth";
+import "firebase/compat/firestore";
+import "firebase/compat/storage";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyClsBFbM3egdLhBX8FQ4M7w-y3STWpfy7E",
-  authDomain: "exchangezone-af529.firebaseapp.com",
-  projectId: "exchangezone-af529",
-  storageBucket: "exchangezone-af529.appspot.com",
-  messagingSenderId: "214002481499",
-  appId: "1:214002481499:web:a01c0bbdef61c8b263427e"
+  apiKey: process.env.REACT_APP_API_KEY,
+  authDomain: process.env.REACT_APP_AUTH_DOMAIN,
+  projectId: process.env.REACT_APP_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_SENDER_ID,
+  appId: process.env.REACT_APP_API_ID,
 };
 
-  export const Firebase= firebase.initializeApp(firebaseConfig)//named export
+export const Firebase = firebase.initializeApp(firebaseConfig); //named export
