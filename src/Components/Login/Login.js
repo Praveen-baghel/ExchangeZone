@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import {useHistory} from "react-router-dom";
 import { Firebase } from "../../firebase/config";
-import Logo from "../../olx-logo.png";
+// import Logo from "../../olx-logo.png";
 import RoundLoading from "../Loading/RoundLoading";
 import "./Login.css";
 
@@ -25,7 +25,7 @@ function Login() {
     {loading && <RoundLoading/> }
     <div>
       <div className="loginParentDiv">
-        <img width="200px" height="200px" src={Logo} alt=""></img>
+        {/* <img width="200px" height="200px" src={Logo} alt=""></img> */}
         <form onSubmit={handleSubmit}>
           <label>Email</label>
           <br />
