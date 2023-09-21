@@ -30,7 +30,10 @@ jobs:
           REACT_APP_SENDER_ID: ${{secrets.REACT_APP_SENDER_ID}}
           REACT_APP_API_ID: ${{secrets.REACT_APP_API_ID}}
         run: |
-          git config --local user.name "github-actions[bot]"
-          git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          npm run build 
-          npm run deploy
+          npm run build
+
+      - name: Deploy
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: build/
