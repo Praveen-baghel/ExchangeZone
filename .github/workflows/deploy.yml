@@ -30,6 +30,7 @@ jobs:
           REACT_APP_SENDER_ID: ${{secrets.REACT_APP_SENDER_ID}}
           REACT_APP_API_ID: ${{secrets.REACT_APP_API_ID}}
         run: |
-            git config remote.origin.url 'https://${{secrets.TOKEN}}@github.com/ExchangeZone'
-            npm run build
-            npm run deploy
+          git config --global user.name "github-actions[bot]"
+          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          npm run build 
+          npm run deploy
