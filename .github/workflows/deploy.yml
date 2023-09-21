@@ -30,5 +30,7 @@ jobs:
           REACT_APP_SENDER_ID: ${{secrets.REACT_APP_SENDER_ID}}
           REACT_APP_API_ID: ${{secrets.REACT_APP_API_ID}}
         run: |
-          npm run build
-          npm run deploy
+            git config --global user.name "Praveen-baghel"
+            git config --global user.email "praveenbaghel88990@gmail.com"
+            npm run build
+            npm run deploy
