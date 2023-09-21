@@ -1,27 +1,65 @@
-name: Deploy after push
-run-name: Deploy to gh-pages
+# name: Deploy after push
+# run-name: Deploy to gh-pages
+# on:
+#   push:
+#     branches:
+#       - master
+# jobs:
+#   deploy-job:
+#     name: deploy
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout code
+#         uses: actions/checkout@v2
+
+#       - name: Set up Node.js
+#         uses: actions/setup-node@v2
+#         # with:
+#         #   node-version: latest
+
+#       - name: Install dependencies
+#         run: npm install
+
+#       - name: Deploy to GitHub Pages
+#         env:
+#           REACT_APP_API_KEY: ${{secrets.REACT_APP_API_KEY}}
+#           REACT_APP_AUTH_DOMAIN: ${{secrets.REACT_APP_AUTH_DOMAIN}}
+#           REACT_APP_PROJECT_ID: ${{secrets.REACT_APP_PROJECT_ID}}
+#           REACT_APP_STORAGE_BUCKET: ${{secrets.REACT_APP_STORAGE_BUCKET}}
+#           REACT_APP_SENDER_ID: ${{secrets.REACT_APP_SENDER_ID}}
+#           REACT_APP_API_ID: ${{secrets.REACT_APP_API_ID}}
+#         run: |
+#           npm run build
+
+#       - name: Deploy
+#         uses: peaceiris/actions-gh-pages@v3
+#         with:
+#           github_token: ${{ secrets.GITHUB_TOKEN }}
+#           publish_dir: build/
+
+name: Deploy
+
 on:
   push:
     branches:
       - master
+  workflow_dispatch: null
+
 jobs:
-  deploy-job:
-    name: deploy
+  deploy:
     runs-on: ubuntu-latest
-
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: npm
+      - run: npm install
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        # with:
-        #   node-version: latest
-
-      - name: Install dependencies
-        run: npm install
-
-      - name: Deploy to GitHub Pages
+      - name: Build
         env:
           REACT_APP_API_KEY: ${{secrets.REACT_APP_API_KEY}}
           REACT_APP_AUTH_DOMAIN: ${{secrets.REACT_APP_AUTH_DOMAIN}}
@@ -29,11 +67,10 @@ jobs:
           REACT_APP_STORAGE_BUCKET: ${{secrets.REACT_APP_STORAGE_BUCKET}}
           REACT_APP_SENDER_ID: ${{secrets.REACT_APP_SENDER_ID}}
           REACT_APP_API_ID: ${{secrets.REACT_APP_API_ID}}
-        run: |
-          npm run build
+        run: npm run build
 
       - name: Deploy
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: build/
+          publish_dir: build
