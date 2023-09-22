@@ -10,7 +10,7 @@ import ViewMore from "../Pages/ViewMore";
 function MainRoutes() {
   return (
     <Router>
-      <Route exact path="/ExchangeZone">
+      <Route exact path="/">
         <Home />
       </Route>
       <Route path="/signup">
